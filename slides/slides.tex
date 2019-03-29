@@ -1,0 +1,317 @@
+\documentclass[10pt, professionalfonts]{beamer}
+
+\usetheme[progressbar=frametitle]{metropolis}
+\usepackage{appendixnumberbeamer}
+
+\usepackage[brazil]{babel} % Use brazilian portuguese by default
+\usepackage{amsmath}
+\usepackage{graphicx, wrapfig}
+\graphicspath{ {./imgs/} }
+\newcommand*\rfrac[2]{{}^{#1}\!/_{#2}}
+
+\definecolor{myBeige}{HTML}{faf7f0}
+\definecolor{myRed}{HTML}{e45d53}
+\setbeamercolor{frametitle}{bg=myBeige, fg=normal text.fg}
+\setbeamercolor{background canvas}{bg=myBeige, fg=normal text.fg}
+
+% Configure title graphic positioning
+\setbeamertemplate{title graphic}{%
+  \vbox to 0pt {
+    \vspace*{.75\textheight}  % change the value as necessary
+    \hfill\inserttitlegraphic%
+  }%
+  \nointerlineskip%
+}
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+\usepackage{xspace}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\title{Teoria de Aprendizagem Computacional}
+\subtitle{Uma Brevíssima Introdução}
+\date{\today}
+\author{Fred Guth}
+\institute{%
+Departamento de Ciência da Computação\\%
+Universidade de Brasília\\%
+\par%
+316415\\%
+Seminário}
+
+\graphicspath{{./imgs/}}
+
+\titlegraphic{\includegraphics[width=2.5cm]{logoUnB.png}}
+
+
+\begin{document}
+
+\maketitle
+
+
+
+
+
+
+{
+\AtBeginSection{}
+\section{Teoria da Aprendizagem Computacional}
+\begin{frame}{Teoria da Aprendizagem Computacional}
+
+    \centering
+    \includegraphics<1>[width=.7\textwidth]{venn_lt}
+    \includegraphics<2>[width=.4\textwidth]{venn_lt}
+
+    \pause
+    \begin{columns}[c]
+      \column{.3\textwidth}
+        \begin{figure}
+          \label{valiant}
+          \framebox{\includegraphics[width=1.5in]{leslie}}
+          \caption{Leslie Valiant, Prêmio Turing 2010.}
+        \end{figure}
+      \column{.7\textwidth}
+      \begin{quotation}
+        "Que tamanho o conjunto de treinamento precisa ter para, com alta probabilidade, chegarmos a uma boa generalização?"
+      \end{quotation}
+      \hspace*{1cm}\url{learningtheory.org/colt19}~\cite{COLT}
+    \end{columns}
+\end{frame}
+}
+
+
+\begin{frame}{O que é Apreensível?}
+ 
+  \mode<article>{The proof uses reductio ad absurdum. Although this comment is inside a \texttt{beamer} frame, it only appears in the handout.}
+\begin{columns}[c]
+  \column{.6\textwidth}
+Não há justificativa para generalizações~\cite{Hume2009Tratado}: 
+\begin{quotation}
+  ``Sempre que no passado comi pão, ele me alimentou. Portanto, da próxima vez que comer pão, ele me alimentará''.
+\end{quotation}~\cite{hume2004investigacoes}
+  \column{.3\textwidth}
+  \centering 
+  \begin{figure}
+    \label{hume}
+    \framebox{\includegraphics[width=1.5in]{hume}}
+    \caption{David Hume (1711-1776).}
+  \end{figure} 
+\end{columns}
+\end{frame}
+
+\begin{frame}{Table of contents}
+  \setbeamertemplate{section in toc}[sections numbered]
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+
+{
+\AtBeginSection{}
+\section{Modelo de Aprendizado PAC}
+
+\begin{frame}{Definições}
+  \begin{figure}[!htp]
+    \centering
+    \includegraphics[width=.8\textwidth]{function}
+    \label{function}
+    \caption{Um algoritmo genérico: $\mathcal{X} \to \mathcal{Y}$.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Definições: conceito}
+  \begin{figure}[!htp]
+    \centering
+    \includegraphics[width=.8\textwidth]{concept}
+    \label{concept}
+    \caption{Um conceito $c$.}
+  \end{figure}
+\end{frame}
+\begin{frame}{Definições: hipótese}
+  \begin{figure}[!htp]
+    \centering
+    \includegraphics[width=.8\textwidth]{hypothesis}
+    \label{hypothesis}
+    \caption{Uma hipótese $h \in \mathcal{H}$.}
+  \end{figure}
+\end{frame}
+\begin{frame}{Definições: aprendiz}
+  \begin{figure}[!htp]
+    \centering
+    \includegraphics[width=.8\textwidth]{diagram}
+    \label{diagram}
+    \caption{Um aprendiz genérico $L$.}
+  \end{figure}
+
+\end{frame}
+\begin{frame}{Definições: espaço de hipóteses  $\mathcal{H}$}
+  \begin{figure}[!htp]
+    \centering
+    \includegraphics[width=.95\textwidth]{hspaces}
+    \label{hspaces}
+    \caption{hipóteses pertencentes a diferentes espaços de hipóteses $\mathcal{H}$.}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Definições: erro de $h$}
+  \begin{figure}[!htp]
+    \centering
+    \includegraphics[width=.8\textwidth]{conceptVShypothesis}
+    \label{conceptVShypothesis}
+\end{figure}
+\begin{equation}
+  erro_{\mathcal{D}}(h) \equiv \underset{x \sim \mathcal{D}}{Pr}[c(x) \neq h(x)]
+\end{equation}
+\begin{equation}
+erro_{S}(h) \equiv \underset{x \sim \mathcal{S}}{Pr}[c(x) \neq h(x)]
+\end{equation}
+\end{frame}
+
+\begin{frame}{Modelo de Aprendizado PAC}
+  \begin{equation}
+    \underbrace{\text{ Provavelmente }}_{>(1-\delta)}
+    \underbrace{\text{ Aproximadamente }}_{\leq\epsilon}
+    \underbrace{\text{   Correto   }}_{\underset{x \sim \mathcal{D}}{Pr}[c(x) \neq h(x)]=0} \nonumber
+  \end{equation}~\cite{Valiant1984}
+  \begin{figure}[!htp]
+    \centering
+    \includegraphics[width=.3\textwidth]{erro}
+    \label{conceptVShypothesis}
+  \end{figure}
+  \begin{equation}
+    Pr_{x \sim \mathcal{D}}[c(x) \neq h(x)] \leq \epsilon] > (1-\delta)
+  \end{equation}
+  
+\end{frame}
+\begin{frame}{Modelo de Aprendizado PAC}
+    \noindent\fbox{%
+      \parbox{\textwidth}{%
+          $C$ é \textbf{PAC-apreensível} por $L$ se e somente se, com probabilidade $1 - \delta$, $L$ gera uma hipótese $h \in \mathcal{H}$ com $erro_{\mathcal{D}}(h)\leq\epsilon$ com número de amostras polinomial em função de $\rfrac{1}{\delta}$, $\rfrac{1}{\epsilon}$, $|\mathcal{X}|$ e $|\mathcal{H}|$, para $0 < \epsilon \leq \frac{1}{2}$ e $0 < \delta \leq \frac{1}{2}$.
+      }%
+    }
+
+      \bigskip
+      \noindent\fbox{%
+      \parbox{\textwidth}{%
+          $C$ é \textbf{eficientemente PAC-apreensível} por $L$ se e somente se $L$ é \textbf{PAC-apreensível} e gera hipótese em tempo polinomial em função de $\rfrac{1}{\delta}$, $\rfrac{1}{\epsilon}$, $|\mathcal{X}|$ e $|\mathcal{H}|$~\cite{MitchelPAC}.
+      }%
+    }
+    
+    
+\end{frame}
+
+
+}
+{
+
+  \AtBeginSection{}
+  \section{Teorema de Haussler}
+  \begin{frame}{Teorema de Haussler (1988): Limite do erro absoluto}
+    \noindent\fbox{%
+      \parbox{\textwidth}{%
+      \textbf{Teorema: } Seja $\mathcal{H}$ finito, $C \subset \mathcal{H}$ e $L$ um aprendiz consistente. Se $|S|=m, m \geq 1$, então 
+        $Pr[\exists h \in \mathcal{H}: error_{\mathcal{D}}(h)>\epsilon]\leq |H|e^{-\epsilon m}$\cite{Haussler1988}
+      }%
+    }
+    \begin{proof}  Sejam $h_i (i = 1, ..., k) \in \mathcal{H}$ tais que $erro_{\mathcal{D}}(h_i)>\epsilon$
+      \begin{align}
+      Pr_{x_j\sim\mathcal{S}}[(c(x_j) \neq h_i(x_j))=0] \leq (1-\epsilon) \label{haussler:a} \\
+      Pr[\forall h \in |\mathcal{H}|: (erro_{S}(h)=0 \land erro_{\mathcal{D}}(h)> \epsilon)] \leq (1-\epsilon)^m \label{haussler:b} \\
+      Pr[\exists h \in H: erro_{\mathcal{D}}(h)>\epsilon]\leq k (1-\epsilon)^m \label{haussler:c} \\
+      Pr[\exists h \in H: erro_{\mathcal{D}}(h)>\epsilon]\leq |\mathcal{H}| (1-\epsilon)^m \label{haussler:d} \\ 
+      (1-x) \leq e^{-x}, 0 \leq x \leq 1 \implies \nonumber \\ Pr[\exists h \in \mathcal{H}: error_{\mathcal{D}}(h)>\epsilon]\leq |H|e^{-\epsilon m}  \label{haussler:e} \\
+      \qedhere
+      \end{align}
+      \end{proof}
+      
+
+  \end{frame}
+\begin{frame}{Teorema de Haussler (1988): Implicações}
+  \noindent\fbox{%
+    \parbox{\textwidth}{%
+    $|H|e^{-\epsilon m}=\delta \implies $ aprendiz $L$ aprende $C$ em $m = \frac{1}{\epsilon}(\ln{|\mathcal{H}|}+\ln{\frac{1}{\delta}})$ amostras de treinamento. 
+    }%
+}
+
+\begin{proof}  Dado $Pr[\exists h \in \mathcal{H}: error_{\mathcal{D}}(h)>\epsilon]\leq |H|e^{-\epsilon m}$ (Haussler) e $Pr[\exists h \in \mathcal{H}: error_{\mathcal{D}}(h)>\epsilon]\leq \delta$ (PAC), podemos supor:
+\begin{align}
+    |\mathcal{H}|e^{-\epsilon m}=\delta \implies e^{-\epsilon m} = \frac{\delta}{|\mathcal{H}|} \\
+    - \epsilon m = (\ln{\delta} - \ln{|\mathcal{H}|})  \\
+    \epsilon m = (\ln{|\mathcal{H}|} - \ln{\delta}) \\
+    m = \frac{1}{\epsilon}(\ln{|\mathcal{H}|} + \ln{\frac{1}{\delta}}) \\
+    \qedhere
+\end{align}
+\end{proof}
+
+\end{frame}
+}
+
+
+{
+
+  \AtBeginSection{}
+\section{Conclusão}
+\begin{frame}{Conclusão}
+  \begin{itemize}[<+->]
+    \item Teoria de Aprendizagem Computacional = Teoria da Computação + Aprendizagem de Máquina
+    \item Podemos limitar \textbf{erro absoluto} mesmo só conhecendo o \textbf{erro de treinamento}
+    \item Para determinados $\delta$ e $\epsilon$, o tamanho do conjunto de treinamento necessário \textbf{independe} de $\mathcal{C}$ ou  de $P(\mathcal{X})$.
+    \item ... e depende apenas logaritmicamente de $|\mathcal{H}|$
+    \item Na prática esses limites são muito "frouxos" \cite{MitchelPAC}: preferência por modelos pequenos
+    \end{itemize}
+\end{frame}
+}
+{
+
+  \AtBeginSection{}
+\section{Referências}
+\begin{frame}[allowframebreaks]{Referências}
+
+  \bibliography{references}
+  \bibliographystyle{abbrv}
+
+\end{frame}
+}
+\begin{frame}<beamer>[standout]
+  Obrigado.
+  \vspace*{.5cm}
+\begin{center}\href{https://github.com/fredguth/learning_theory}{\url{github.com/fredguth/learning_theory}}\end{center}
+  \vspace*{.5cm}
+  \small{
+    \begin{center}\ccbysa\end{center}
+    \href{http://creativecommons.org/licenses/by-sa/4.0/}{Creative Commons \\
+      Attribution-ShareAlike 4.0 International License}.
+  }
+\end{frame}
+
+% \appendix
+
+% \begin{frame}[fragile]{Backup slides}
+%   Sometimes, it is useful to add slides at the end of your presentation to
+%   refer to during audience questions.
+
+%   The best way to do this is to include the \verb|appendixnumberbeamer|
+%   package in your preamble and call \verb|\appendix| before your backup slides.
+
+%   \themename will automatically turn off slide numbering and progress bars for
+%   slides in the appendix.
+% \end{frame}
+
+
+
+\end{document}

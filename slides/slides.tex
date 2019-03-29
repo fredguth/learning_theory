@@ -69,32 +69,34 @@ Seminário}
 
 
 {
-\AtBeginSection{}
-\section{Preâmbulo: Teoria da Aprendizagem Computacional}
-\begin{frame}{Teoria da Aprendizagem Computacional}
+  \AtBeginSection{}
+  \section{Preâmbulo: Teoria da Aprendizagem Computacional}
+  \begin{frame}{Teoria da Aprendizagem Computacional}
 
-    \centering
-    \includegraphics<1>[width=.7\textwidth]{venn_lt}
-    \includegraphics<2>[width=.4\textwidth]{venn_lt}
+      \centering
+      \centerline{\includegraphics<1>[width=.7\textwidth]{venn_lt}}
+      \includegraphics<2>[width=.4\textwidth]{venn_lt}
 
-    \pause
-    \begin{columns}[c]
-      \column{.3\textwidth}
-        \begin{figure}
-          \label{valiant}
-          \framebox{\includegraphics[width=1.5in]{leslie}}
-          \caption{Leslie Valiant, Prêmio Turing 2010.}
-        \end{figure}
-      \column{.7\textwidth}
-      \begin{quotation}
-        "Que tamanho o conjunto de treinamento precisa ter para, com alta probabilidade, chegarmos a uma boa generalização?"
-      \end{quotation}
-      \hspace*{1cm}\url{learningtheory.org/colt19}~\cite{COLT}
-    \end{columns}
-\end{frame}
+      \pause
+      \begin{columns}[c]
+        \column{.3\textwidth}
+          \begin{figure}
+            \label{valiant}
+            \framebox{\includegraphics[width=1.5in]{leslie}}
+            \caption{Leslie Valiant, Prêmio Turing 2010.}
+          \end{figure}
+        \column{.7\textwidth}
+        \begin{quotation}
+          "Que tamanho o conjunto de treinamento precisa ter para, com alta probabilidade, chegarmos a uma boa generalização?"
+        \end{quotation}
+        \hspace*{1cm}\url{learningtheory.org/colt19}~\cite{COLT}
+      \end{columns}
+  \end{frame}
 }
 
-
+{
+\AtBeginSection{}
+\section{Preâmbulo: Apreensibilidade}
 \begin{frame}{O que é Apreensível?}
  
   \mode<article>{The proof uses reductio ad absurdum. Although this comment is inside a \texttt{beamer} frame, it only appears in the handout.}
@@ -113,8 +115,8 @@ Não há justificativa para generalizações~\cite{Hume2009Tratado}:
   \end{figure} 
 \end{columns}
 \end{frame}
-
-\begin{frame}{Índice}
+}
+\begin{frame}{Visão Geral}
   \setbeamertemplate{section in toc}[sections numbered]
   \tableofcontents[hideallsubsections]
 \end{frame}
@@ -174,11 +176,12 @@ Não há justificativa para generalizações~\cite{Hume2009Tratado}:
     \includegraphics[width=.8\textwidth]{conceptVShypothesis}
     \label{conceptVShypothesis}
 \end{figure}
+Erro de Treinamento:\begin{equation}
+  erro_{S}(h) \equiv \underset{x \sim \mathcal{S}}{Pr}[c(x) \neq h(x)]
+\end{equation}
+Erro de Absoluto:
 \begin{equation}
   erro_{\mathcal{D}}(h) \equiv \underset{x \sim \mathcal{D}}{Pr}[c(x) \neq h(x)]
-\end{equation}
-\begin{equation}
-erro_{S}(h) \equiv \underset{x \sim \mathcal{S}}{Pr}[c(x) \neq h(x)]
 \end{equation}
 \end{frame}
 
@@ -268,7 +271,7 @@ erro_{S}(h) \equiv \underset{x \sim \mathcal{S}}{Pr}[c(x) \neq h(x)]
 \section{Conclusão}
 \begin{frame}{Conclusão}
   \begin{itemize}[<+->]
-    \item Teoria de Aprendizagem Computacional = Teoria da Computação + Aprendizagem de Máquina
+    \item Aprendizagem Computacional = Teoria da Computação $\cap$  Aprendizagem de Máquina
     \item Podemos limitar \textbf{erro absoluto} mesmo só conhecendo o \textbf{erro de treinamento}
     \item Para determinados $\delta$ e $\epsilon$, o tamanho do conjunto de treinamento necessário \textbf{independe} de $\mathcal{C}$ ou  de $P(\mathcal{X})$.
     \item ... e depende apenas logaritmicamente de $|\mathcal{H}|$
@@ -299,18 +302,14 @@ erro_{S}(h) \equiv \underset{x \sim \mathcal{S}}{Pr}[c(x) \neq h(x)]
   }
 \end{frame}
 
-% \appendix
+\appendix
 
-% \begin{frame}[fragile]{Backup slides}
-%   Sometimes, it is useful to add slides at the end of your presentation to
-%   refer to during audience questions.
-
-%   The best way to do this is to include the \verb|appendixnumberbeamer|
-%   package in your preamble and call \verb|\appendix| before your backup slides.
-
-%   \themename will automatically turn off slide numbering and progress bars for
-%   slides in the appendix.
-% \end{frame}
+\begin{frame}[fragile]{Para saber mais}
+  \begin{itemize}
+    \item \href{http://bit.ly/tom_mitchel_learning_theory}{\url{http://bit.ly/tom_mitchel_learning_theory}}
+    \item \href{https://www.youtube.com/watch?v=dYMCwxgl3vk&t=1594s}{Hypothesis Space and Inductive Bias: \url{https://www.youtube.com/watch?v=dYMCwxgl3vk&t=1594s}}
+  \end{itemize}
+\end{frame}
 
 
 

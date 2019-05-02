@@ -119,7 +119,12 @@ Não há justificativa para generalizações do tipo~\cite{Hume2009Tratado}:
       \underbrace{\text{ Aproximadamente }}_{\textrm{tolerância} \leq\epsilon}
       \underbrace{\text{   Correto   }}_{\textrm{Erro Absoluto} = 0} \nonumber
     \end{equation}
-    
+    \pause
+  \begin{itemize}
+    \item Com alta probabilidade, o erro é pequeno.
+    \item Amostras de uma distribuição arbitrária, mas a mesma para treinamento e teste.
+    \item Complexidade computacional e de amostras limitadas polinomialmente ao inverso dos erros.
+  \end{itemize}
   \end{frame}
 }
 
@@ -143,36 +148,36 @@ Não há justificativa para generalizações do tipo~\cite{Hume2009Tratado}:
     \item [$S=\{(x_i, c(x_i))\}$]: conjunto de amostras de treinamento;
     \item [$h \in \mathcal{H}$]: hipótese do espaço de Hipóteses;
     \item [$erro_{S}(h)$]: erro de treinamento de $h$, $erro_{S}(h) \equiv \underset{x \sim \mathcal{S}}{P}[c(x) \neq h(x)]$;
-    \item [$erro_{\mathcal{D}}(h)$]: erro absoluto de $h$, $erro_{\mathcal{D}}(h) \equiv \underset{x \sim \mathcal{D}}{Pr}[c(x) \neq h(x)]$;
+    \item [$erro_{\mathcal{D}}(h)$]: erro absoluto de $h$, $erro_{\mathcal{D}}(h) \equiv \underset{x \sim \mathcal{D}}{P}[c(x) \neq h(x)]$;
     
   \end{description}
 \end{frame}
 
-\begin{frame}{Definições: conceito}
-  \begin{figure}[!htp]
-    \centering
-    \includegraphics[width=.8\textwidth]{concept}
-    \label{concept}
-    \caption{Um conceito $c$.}
-  \end{figure}
-\end{frame}
-\begin{frame}{Definições: hipótese}
-  \begin{figure}[!htp]
-    \centering
-    \includegraphics[width=.8\textwidth]{hypothesis}
-    \label{hypothesis}
-    \caption{Uma hipótese $h \in \mathcal{H}$.}
-  \end{figure}
-\end{frame}
-\begin{frame}{Definições: aprendiz}
-  \begin{figure}[!htp]
-    \centering
-    \includegraphics[width=.8\textwidth]{diagram}
-    \label{diagram}
-    \caption{Um aprendiz genérico $L$.}
-  \end{figure}
+% \begin{frame}{Definições: conceito}
+%   \begin{figure}[!htp]
+%     \centering
+%     \includegraphics[width=.8\textwidth]{concept}
+%     \label{concept}
+%     \caption{Um conceito $c$.}
+%   \end{figure}
+% \end{frame}
+% \begin{frame}{Definições: hipótese}
+%   \begin{figure}[!htp]
+%     \centering
+%     \includegraphics[width=.8\textwidth]{hypothesis}
+%     \label{hypothesis}
+%     \caption{Uma hipótese $h \in \mathcal{H}$.}
+%   \end{figure}
+% \end{frame}
+% \begin{frame}{Definições: aprendiz}
+%   \begin{figure}[!htp]
+%     \centering
+%     \includegraphics[width=.8\textwidth]{diagram}
+%     \label{diagram}
+%     \caption{Um aprendiz genérico $L$.}
+%   \end{figure}
 
-\end{frame}
+% \end{frame}
 \begin{frame}{Definições: espaço de hipóteses  $\mathcal{H}$}
   \begin{figure}[!htp]
     \centering
@@ -189,12 +194,12 @@ Não há justificativa para generalizações do tipo~\cite{Hume2009Tratado}:
     \includegraphics[width=.8\textwidth]{conceptVShypothesis}
     \label{conceptVShypothesis}
 \end{figure}
-Erro de Treinamento:\begin{equation}
-  erro_{S}(h) \equiv \underset{x \sim \mathcal{S}}{Pr}[c(x) \neq h(x)]
+\textbf{Erro de Treinamento:}\begin{equation}
+  erro_{S}(h) \equiv \underset{x \sim \mathcal{S}}{P}[c(x) \neq h(x)]
 \end{equation}
-Erro de Absoluto:
+\textbf{Erro de Absoluto:}
 \begin{equation}
-  erro_{\mathcal{D}}(h) \equiv \underset{x \sim \mathcal{D}}{Pr}[c(x) \neq h(x)]
+  erro_{\mathcal{D}}(h) \equiv \underset{x \sim \mathcal{D}}{P}[c(x) \neq h(x)]
 \end{equation}
 \end{frame}
 
@@ -206,7 +211,7 @@ Erro de Absoluto:
   \noindent\fbox{%
     \parbox{\textwidth}{%
     
-        $C$ é \textbf{PAC-apreensível} por $\mathcal{A}$  se e somente se, com probabilidade $1 - \delta$, $\mathcal{A}$  gera uma hipótese $h \in \mathcal{H}$ com $erro_{\mathcal{D}}(h)\leq\epsilon$ com número de amostras polinomial em função de $\rfrac{1}{\delta}$, $\rfrac{1}{\epsilon}$, $n=$ tamanho da instância e $size(c)=$ tamanho do conceito, para $0 < \epsilon \leq \frac{1}{2}$ e $0 < \delta \leq \frac{1}{2}$.
+        $C$ é \textbf{PAC-apreensível} por $\mathcal{A}$  se e somente se, com probabilidade $1 - \delta$, $\mathcal{A}$  gera uma hipótese $h \in \mathcal{H}$ com $erro_{\mathcal{D}}(h)\leq\epsilon$ com número de amostras polinomial em função de $\rfrac{1}{\delta}$, $\rfrac{1}{\epsilon}$, $n=$ tamanho da instância e $tamanho(c)=$ tamanho do conceito, para $0 < \epsilon \leq \frac{1}{2}$ e $0 < \delta \leq \frac{1}{2}$.
     }%
   }
 
@@ -222,35 +227,36 @@ Erro de Absoluto:
 {
 
   \AtBeginSection{}
-  \section{Teorema de Haussler}
-  \begin{frame}{Teorema de Haussler (1988): Limite do erro absoluto}
+  \section{Teorema de Haussler: Limites para $\mathcal{H}$ finito.}
+  \begin{frame}{Haussler (1988): Limites para $\mathcal{H}$ finito.}
     \noindent\fbox{%
       \parbox{\textwidth}{%
-      \textbf{Teorema: } Seja $\mathcal{H}$ finito, $C \subset \mathcal{H}$ e $L$ um aprendiz consistente. Se $|S|=m, m \geq 1$, então 
-        $Pr[\exists h \in \mathcal{H}: error_{\mathcal{D}}(h)>\epsilon]\leq |H|e^{-\epsilon m}$\cite{Haussler1988}
+      \textbf{Teorema: } Seja $\mathcal{H}$ finito, $C \subset \mathcal{H}$ e $\mathcal{A}$ um aprendiz consistente. Se $|S|=m, m \geq 1$, então 
+        $P[\exists h \in \mathcal{H}: error_{\mathcal{D}}(h)>\epsilon]\leq |H|e^{-\epsilon m}$\cite{Haussler1988}
       }%
     }
+    \pause
     \begin{proof}  Sejam $h_i (i = 1, ..., k) \in \mathcal{H}$ tais que $erro_{\mathcal{D}}(h_i)>\epsilon$
       \begin{align}
-      Pr_{x_j\sim\mathcal{S}}[(c(x_j) \neq h_i(x_j))=0] \leq (1-\epsilon) \label{haussler:a} \\
-      Pr[\forall h \in |\mathcal{H}|: (erro_{S}(h)=0 \land erro_{\mathcal{D}}(h)> \epsilon)] \leq (1-\epsilon)^m \label{haussler:b} \\
-      Pr[\exists h \in H: erro_{\mathcal{D}}(h)>\epsilon]\leq k (1-\epsilon)^m \label{haussler:c} \\
-      Pr[\exists h \in H: erro_{\mathcal{D}}(h)>\epsilon]\leq |\mathcal{H}| (1-\epsilon)^m \label{haussler:d} \\ 
-      (1-x) \leq e^{-x}, 0 \leq x \leq 1 \implies \nonumber \\ Pr[\exists h \in \mathcal{H}: error_{\mathcal{D}}(h)>\epsilon]\leq |H|e^{-\epsilon m}  \label{haussler:e} \\
+      P_{x_j\sim\mathcal{S}}[(c(x_j) \neq h_i(x_j))=0] \leq (1-\epsilon) \label{haussler:a} \\
+      P[\forall h \in |\mathcal{H}|: (erro_{S}(h)=0 \land erro_{\mathcal{D}}(h)> \epsilon)] \leq (1-\epsilon)^m \label{haussler:b} \\
+      P[\exists h \in H: erro_{\mathcal{D}}(h)>\epsilon]\leq k (1-\epsilon)^m \label{haussler:c} \\
+      P[\exists h \in H: erro_{\mathcal{D}}(h)>\epsilon]\leq |\mathcal{H}| (1-\epsilon)^m \label{haussler:d} \\ 
+      (1-x) \leq e^{-x}, 0 \leq x \leq 1 \implies \nonumber \\ P[\exists h \in \mathcal{H}: error_{\mathcal{D}}(h)>\epsilon]\leq |H|e^{-\epsilon m}  \label{haussler:e} \\
       \qedhere
       \end{align}
       \end{proof}
       
 
   \end{frame}
-\begin{frame}{Teorema de Haussler (1988): Implicações}
+\begin{frame}{Haussler (1988): Implicações}
   \noindent\fbox{%
     \parbox{\textwidth}{%
-    $|H|e^{-\epsilon m}=\delta \implies $ aprendiz $L$ aprende $C$ em $m = \frac{1}{\epsilon}(\ln{|\mathcal{H}|}+\ln{\frac{1}{\delta}})$ amostras de treinamento. 
+    $|H|e^{-\epsilon m}=\delta \implies $ aprendiz $\mathcal{A}$ aprende $C$ em $m = \frac{1}{\epsilon}(\ln{|\mathcal{H}|}+\ln{\frac{1}{\delta}})$ amostras de treinamento. 
     }%
 }
-
-\begin{proof}  Dado $Pr[\exists h \in \mathcal{H}: error_{\mathcal{D}}(h)>\epsilon]\leq |H|e^{-\epsilon m}$ (Haussler) e $Pr[\exists h \in \mathcal{H}: error_{\mathcal{D}}(h)>\epsilon]\leq \delta$ (PAC), podemos supor:
+\pause
+\begin{proof}  Dado $P[\exists h \in \mathcal{H}: error_{\mathcal{D}}(h)>\epsilon]\leq |H|e^{-\epsilon m}$ (Haussler) e $P[\exists h \in \mathcal{H}: error_{\mathcal{D}}(h)>\epsilon]\leq \delta$ (PAC), podemos supor:
 \begin{align}
     |\mathcal{H}|e^{-\epsilon m}=\delta \implies e^{-\epsilon m} = \frac{\delta}{|\mathcal{H}|} \\
     - \epsilon m = (\ln{\delta} - \ln{|\mathcal{H}|})  \\
@@ -263,7 +269,19 @@ Erro de Absoluto:
 \end{frame}
 }
 
+{
 
+  \AtBeginSection{}
+\section{Algumas aplicações do modelo PAC}
+\begin{frame}{Algumas aplicações do modelo PAC}
+  \begin{itemize}[<+->]
+    \item "Conceito Universal" é PAC-apreensível?
+    \item Conjunção de n booleanos é PAC-apreensível?
+    \item k-CNF é PAC apreensível?
+    \item k-DNF é PAC apreensível?
+    \end{itemize}
+\end{frame}
+}
 {
 
   \AtBeginSection{}

@@ -52,7 +52,7 @@ Departamento de Ciência da Computação\\%
 Universidade de Brasília\\%
 \par%
 316415\\%
-Seminário}
+Seminários}
 
 \graphicspath{{./imgs/}}
 
@@ -67,42 +67,15 @@ Seminário}
 
 
 
-
-{
-  \AtBeginSection{}
-  \section{Preâmbulo: Teoria da Aprendizagem Computacional}
-  \begin{frame}{Teoria da Aprendizagem Computacional}
-
-      \centering
-      \centerline{\includegraphics<1>[width=.7\textwidth]{venn_lt}}
-      \includegraphics<2>[width=.4\textwidth]{venn_lt}
-
-      \pause
-      \begin{columns}[c]
-        \column{.3\textwidth}
-          \begin{figure}
-            \label{valiant}
-            \framebox{\includegraphics[width=1.5in]{leslie}}
-            \caption{Leslie Valiant, Prêmio Turing 2010.}
-          \end{figure}
-        \column{.7\textwidth}
-        \begin{quotation}
-          "Que tamanho o conjunto de treinamento precisa ter para, com alta probabilidade, chegarmos a uma boa generalização?"
-        \end{quotation}
-        \hspace*{1cm}\url{learningtheory.org/colt19}~\cite{COLT}
-      \end{columns}
-  \end{frame}
-}
-
 {
 \AtBeginSection{}
-\section{Preâmbulo: Apreensibilidade}
+\section{Preâmbulo}
 \begin{frame}{O que é Apreensível?}
- 
-  \mode<article>{The proof uses reductio ad absurdum. Although this comment is inside a \texttt{beamer} frame, it only appears in the handout.}
+
 \begin{columns}[c]
   \column{.6\textwidth}
-Não há justificativa para generalizações~\cite{Hume2009Tratado}: 
+\textbf{O problema da indução:}\\
+Não há justificativa para generalizações do tipo~\cite{Hume2009Tratado}: 
 \begin{quotation}
   ``Sempre que no passado comi pão, ele me alimentou. Portanto, da próxima vez que comer pão, ele me alimentará''.
 \end{quotation}~\cite{hume2004investigacoes}
@@ -115,24 +88,64 @@ Não há justificativa para generalizações~\cite{Hume2009Tratado}:
   \end{figure} 
 \end{columns}
 \end{frame}
+
+  \begin{frame}{Teoria da Aprendizagem Computacional}
+
+      \centering
+      \centerline{\includegraphics<1>[width=1\textwidth]{venn_lt}}
+      \includegraphics<2>[width=.4\textwidth]{venn_lt}
+
+      \pause
+      \only<2>{
+        \begin{columns}[c]
+          \column{.3\textwidth}
+            \begin{figure}
+              \label{valiant}
+              \framebox{\includegraphics[width=1.3in]{leslie}}
+              \caption{Leslie Valiant, Prêmio Turing 2010.}
+            \end{figure}
+          \column{.7\textwidth}
+          \begin{quotation}
+            ``Quantas amostras são necessárias para aprendermos um conceito?''
+          \end{quotation}
+          \hspace*{1cm}\url{learningtheory.org/colt19}~\cite{COLT}
+        \end{columns}
+      }
+      
+  \end{frame}
+  \begin{frame}{Modelo de Aprendizado PAC: Definição Informal}
+    \begin{equation}
+      \underbrace{\text{ Provavelmente }}_{\textrm{confiança} >(1-\delta)}
+      \underbrace{\text{ Aproximadamente }}_{\textrm{tolerância} \leq\epsilon}
+      \underbrace{\text{   Correto   }}_{\textrm{Erro Absoluto} = 0} \nonumber
+    \end{equation}
+    
+  \end{frame}
 }
-\begin{frame}{Visão Geral}
-  \setbeamertemplate{section in toc}[sections numbered]
-  \tableofcontents[hideallsubsections]
-\end{frame}
+
+
 
 
 {
 \AtBeginSection{}
-\section{Modelo de Aprendizado PAC}
-
-\begin{frame}{Definições}
-  \begin{figure}[!htp]
-    \centering
-    \includegraphics[width=.8\textwidth]{function}
-    \label{function}
-    \caption{Um algoritmo genérico: $\mathcal{X} \to \mathcal{Y}$.}
-  \end{figure}
+\section{Modelo de Aprendizado PAC: Definição formal}
+\begin{frame}{Visão Geral}
+  \setbeamertemplate{section in toc}[sections numbered]
+  \tableofcontents[hideallsubsections]
+\end{frame}
+\begin{frame}{Modelo de Aprendizado PAC: Notações e Definições}
+  \begin{description}\setlength\itemsep{1em}
+    \item [$\mathcal{X}$]: espaço das instâncias;
+    \item [$\mathcal{D}$]: distribuição de probabilidade em $\mathcal{X}$;
+    \item [$\mathcal{Y}=\{0,1\}$]: rótulos;
+    \item [$c:\mathcal{X}\to\mathcal{Y}$]: conceito $c \in \mathcal{C}$;
+    \item [$\mathcal{A}$]: algoritmo aprendiz;
+    \item [$S=\{(x_i, c(x_i))\}$]: conjunto de amostras de treinamento;
+    \item [$h \in \mathcal{H}$]: hipótese do espaço de Hipóteses;
+    \item [$erro_{S}(h)$]: erro de treinamento de $h$, $erro_{S}(h) \equiv \underset{x \sim \mathcal{S}}{P}[c(x) \neq h(x)]$;
+    \item [$erro_{\mathcal{D}}(h)$]: erro absoluto de $h$, $erro_{\mathcal{D}}(h) \equiv \underset{x \sim \mathcal{D}}{Pr}[c(x) \neq h(x)]$;
+    
+  \end{description}
 \end{frame}
 
 \begin{frame}{Definições: conceito}
@@ -185,41 +198,27 @@ Erro de Absoluto:
 \end{equation}
 \end{frame}
 
-\begin{frame}{Modelo de Aprendizado PAC}
-  \begin{equation}
-    \underbrace{\text{ Provavelmente }}_{>(1-\delta)}
-    \underbrace{\text{ Aproximadamente }}_{\leq\epsilon}
-    \underbrace{\text{   Correto   }}_{\underset{x \sim \mathcal{D}}{Pr}[c(x) \neq h(x)]=0} \nonumber
-  \end{equation}~\cite{Valiant1984}
-  \begin{figure}[!htp]
-    \centering
-    \includegraphics[width=.3\textwidth]{erro}
-    \label{conceptVShypothesis}
-  \end{figure}
-  \begin{equation}
-    Pr_{x \sim \mathcal{D}}[c(x) \neq h(x)] \leq \epsilon] > (1-\delta)
-  \end{equation}
-  
-\end{frame}
-\begin{frame}{Modelo de Aprendizado PAC}
-    \noindent\fbox{%
-      \parbox{\textwidth}{%
-          $C$ é \textbf{PAC-apreensível} por $L$ se e somente se, com probabilidade $1 - \delta$, $L$ gera uma hipótese $h \in \mathcal{H}$ com $erro_{\mathcal{D}}(h)\leq\epsilon$ com número de amostras polinomial em função de $\rfrac{1}{\delta}$, $\rfrac{1}{\epsilon}$, $|\mathcal{X}|$ e $|\mathcal{H}|$, para $0 < \epsilon \leq \frac{1}{2}$ e $0 < \delta \leq \frac{1}{2}$.
-      }%
-    }
 
-      \bigskip
-      \noindent\fbox{%
-      \parbox{\textwidth}{%
-          $C$ é \textbf{eficientemente PAC-apreensível} por $L$ se e somente se $L$ é \textbf{PAC-apreensível} e gera hipótese em tempo polinomial em função de $\rfrac{1}{\delta}$, $\rfrac{1}{\epsilon}$, $|\mathcal{X}|$ e $|\mathcal{H}|$~\cite{MitchelPAC}.
-      }%
-    }
-    
-    
-\end{frame}
 
 
 }
+\begin{frame}{Modelo de Aprendizado PAC: Definição Formal}
+  \noindent\fbox{%
+    \parbox{\textwidth}{%
+    
+        $C$ é \textbf{PAC-apreensível} por $\mathcal{A}$  se e somente se, com probabilidade $1 - \delta$, $\mathcal{A}$  gera uma hipótese $h \in \mathcal{H}$ com $erro_{\mathcal{D}}(h)\leq\epsilon$ com número de amostras polinomial em função de $\rfrac{1}{\delta}$, $\rfrac{1}{\epsilon}$, $n=$ tamanho da instância e $size(c)=$ tamanho do conceito, para $0 < \epsilon \leq \frac{1}{2}$ e $0 < \delta \leq \frac{1}{2}$.
+    }%
+  }
+
+    \bigskip
+    \noindent\fbox{%
+    \parbox{\textwidth}{%
+        $C$ é \textbf{eficientemente PAC-apreensível} por $\mathcal{A}$ se e somente se $\mathcal{A}$ é \textbf{PAC-apreensível} e gera hipótese em tempo polinomial em função de $\rfrac{1}{\delta}$, $\rfrac{1}{\epsilon}$, $n$ e $tamanho(c)$~\cite{MitchelPAC}.
+    }%
+  }
+  
+  
+\end{frame}
 {
 
   \AtBeginSection{}

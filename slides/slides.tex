@@ -70,12 +70,12 @@ Seminários}
 {
 \AtBeginSection{}
 \section{Preâmbulo}
-\begin{frame}{O que é Apreensível?}
+\begin{frame}{O que é apreensível?}
 
 \begin{columns}[c]
   \column{.6\textwidth}
 \textbf{O problema da indução:}\\
-Não há justificativa para generalizações do tipo~\cite{Hume2009Tratado}: 
+Não há justificativa para generalizações baseadas em indução~\cite{Hume2009Tratado}: 
 \begin{quotation}
   ``Sempre que no passado comi pão, ele me alimentou. Portanto, da próxima vez que comer pão, ele me alimentará''.
 \end{quotation}~\cite{hume2004investigacoes}
@@ -106,7 +106,7 @@ Não há justificativa para generalizações do tipo~\cite{Hume2009Tratado}:
             \end{figure}
           \column{.7\textwidth}
           \begin{quotation}
-            ``Quantas amostras são necessárias para aprendermos um conceito?''
+            ``Quantas amostras são necessárias para um algoritmo aprender uma tarefa?''
           \end{quotation}
           \hspace*{1cm}\url{learningtheory.org/colt19}~\cite{COLT}
         \end{columns}
@@ -142,10 +142,10 @@ Não há justificativa para generalizações do tipo~\cite{Hume2009Tratado}:
   \begin{description}\setlength\itemsep{1em}
     \item [$\mathcal{X}$]: espaço das instâncias;
     \item [$\mathcal{D}$]: distribuição de probabilidade em $\mathcal{X}$;
-    \item [$\mathcal{Y}=\{0,1\}$]: rótulos;
+    \item [$\mathcal{Y}=\{0,1\}$]: rótulos $\therefore$ problema de classificação;
     \item [$c:\mathcal{X}\to\mathcal{Y}$]: conceito $c \in \mathcal{C}$;
     \item [$\mathcal{A}$]: algoritmo aprendiz;
-    \item [$S=\{(x_i, c(x_i))\}$]: conjunto de amostras de treinamento;
+    \item [$S=\{(x_i, c(x_i))\}$]: conjunto de amostras de treinamento (aprendizado supervisionado);
     \item [$h \in \mathcal{H}$]: hipótese do espaço de Hipóteses;
     \item [$erro_{S}(h)$]: erro de treinamento de $h$, $erro_{S}(h) \equiv \underset{x \sim \mathcal{S}}{P}[c(x) \neq h(x)]$;
     \item [$erro_{\mathcal{D}}(h)$]: erro absoluto de $h$, $erro_{\mathcal{D}}(h) \equiv \underset{x \sim \mathcal{D}}{P}[c(x) \neq h(x)]$;
@@ -171,11 +171,16 @@ Não há justificativa para generalizações do tipo~\cite{Hume2009Tratado}:
 % \end{frame}
 % \begin{frame}{Definições: aprendiz}
 %   \begin{figure}[!htp]
-%     \centering
-%     \includegraphics[width=.8\textwidth]{diagram}
-%     \label{diagram}
-%     \caption{Um aprendiz genérico $L$.}
-%   \end{figure}
+%   \centering
+%   \begin{tikzpicture}
+%       \node[draw, rectangle, minimum width = 3 cm, minimum height = 2 cm] (fl) at (0,0) {$\mathcal{H}$};
+%       \node[above] at (fl.north) {$\mathcal{A}$};
+%       \draw[<-] (fl) -- node[above]{$S = \{x_i, c(x_i)\}$} node[below]{} ++(-5,0);
+%       \draw[->] (fl) -- node[above]{$h$} node[below]{} ++(5,0);
+%   \end{tikzpicture}
+%   \caption{Um aprendiz genérico $\mathcal{A}$.}
+%   \label{fig:diagram}
+% \end{figure}
 
 % \end{frame}
 \begin{frame}{Definições: espaço de hipóteses  $\mathcal{H}$}
@@ -188,7 +193,7 @@ Não há justificativa para generalizações do tipo~\cite{Hume2009Tratado}:
 
 \end{frame}
 
-\begin{frame}{Definições: erro de $h$}
+\begin{frame}{Definições: 2 tipos de erro de $h$}
   \begin{figure}[!htp]
     \centering
     \includegraphics[width=.8\textwidth]{conceptVShypothesis}
@@ -272,8 +277,8 @@ Não há justificativa para generalizações do tipo~\cite{Hume2009Tratado}:
 {
 
   \AtBeginSection{}
-\section{Algumas aplicações do modelo PAC}
-\begin{frame}{Algumas aplicações do modelo PAC}
+\section{Exemplos de aplicação do modelo PAC}
+\begin{frame}{Exemplos de aplicação do modelo PAC}
   \begin{itemize}[<+->]
     \item "Conceito Universal" é PAC-apreensível?
     \item Conjunção de n booleanos é PAC-apreensível?
@@ -292,7 +297,8 @@ Não há justificativa para generalizações do tipo~\cite{Hume2009Tratado}:
     \item Podemos limitar \textbf{erro absoluto} mesmo só conhecendo o \textbf{erro de treinamento}
     \item Para determinados $\delta$ e $\epsilon$, o tamanho do conjunto de treinamento necessário \textbf{independe} de $\mathcal{C}$ ou  de $P(\mathcal{X})$.
     \item ... e depende apenas logaritmicamente de $|\mathcal{H}|$
-    \item Na prática esses limites são muito "frouxos" \cite{MitchelPAC}: preferência por modelos pequenos
+    \item Na prática esses limites são muito "frouxos" \cite{MitchelPAC}: preferência por modelos pequenos não se justifica experimentalmente
+    \item  k-DNF vs k-CNF evidencia a importância das representações em aprendizado de máquina
     \end{itemize}
 \end{frame}
 }

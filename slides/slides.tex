@@ -169,20 +169,20 @@ Não há justificativa para generalizações baseadas em indução~\cite{Hume200
 %     \caption{Uma hipótese $h \in \mathcal{H}$.}
 %   \end{figure}
 % \end{frame}
-% \begin{frame}{Definições: aprendiz}
-%   \begin{figure}[!htp]
-%   \centering
-%   \begin{tikzpicture}
-%       \node[draw, rectangle, minimum width = 3 cm, minimum height = 2 cm] (fl) at (0,0) {$\mathcal{H}$};
-%       \node[above] at (fl.north) {$\mathcal{A}$};
-%       \draw[<-] (fl) -- node[above]{$S = \{x_i, c(x_i)\}$} node[below]{} ++(-5,0);
-%       \draw[->] (fl) -- node[above]{$h$} node[below]{} ++(5,0);
-%   \end{tikzpicture}
-%   \caption{Um aprendiz genérico $\mathcal{A}$.}
-%   \label{fig:diagram}
-% \end{figure}
+\begin{frame}{Definições: aprendiz}
+  \begin{figure}[!htp]
+  \centering
+  \begin{tikzpicture}
+      \node[draw, rectangle, line width=0.3mm, minimum width = 3 cm, minimum height = 2 cm] (fl) at (0,0) {$\mathcal{H}$};
+      \node[above] at (fl.north) {$\mathcal{A}$};
+      \draw[<-] (fl) -- node[above]{$S = \{x_i, c(x_i)\}$} node[below]{} ++(-5,0);
+      \draw[->] (fl) -- node[above]{$h$} node[below]{} ++(5,0);
+  \end{tikzpicture}
+  \caption{Um aprendiz genérico $\mathcal{A}$.}
+  \label{fig:diagram}
+\end{figure}
 
-% \end{frame}
+\end{frame}
 \begin{frame}{Definições: espaço de hipóteses  $\mathcal{H}$}
   \begin{figure}[!htp]
     \centering
